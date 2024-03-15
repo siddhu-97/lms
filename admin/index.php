@@ -6,7 +6,7 @@ include 'include/sidebar.php';
 
 
 
-  <main id="main" class="main">
+  
 
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -652,8 +652,9 @@ include 'include/sidebar.php';
       </div>
     </section>
 
-  </main><!-- End #main -->
+  
 
  <?php
+ 
  include 'include/footer.php';
  ?>
