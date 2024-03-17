@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,7 +65,7 @@
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form action="action.php" method="POST" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
@@ -111,41 +112,36 @@
         </div>
 
         <!-- basic modal -->
-        
-        <form >
+           
+        <form id="myForm" method="POST" enctype="multipart/form-data">
         <div class="modal fade" id="basicModal" tabindex="-1">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Basic Modal</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title">Sign Up Here</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row g-3">
                                 <div class="col-md-12">
-                                <input type="text" class="form-control" placeholder="Your Name">
-                                </div>
-                                <div class="col-md-6">
-                                <input type="email" class="form-control" placeholder="Email">
-                                </div>
-                                <div class="col-md-6">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name">
                                 </div>
                                 <div class="col-12">
-                                <input type="text" class="form-control" placeholder="Address">
+                                <input type="email" name="email" class="form-control" placeholder="Email">
                                 </div>
                                 <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="City">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                                 </div>
-                                <div class="col-md-4">
-                                <select id="inputState" class="form-select">
-                                    <option selected="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                                <div class="col-md-6">
+                                <input type="password" name="retype_password" class="form-control" placeholder="Retype Password">
                                 </div>
-                                <div class="col-md-2">
-                                <input type="text" class="form-control" placeholder="Zip">
+                                <div class="col-md-6">
+                                <input type="text" name="contact" class="form-control" placeholder="Contact">
                                 </div>
+                                <div class="col-md-6">
+                                <input class="form-control" type="file" name="uploadfile" id="formFile">
+                                </div>
+                               
                                 <div class="text-center">
                                 </div>
                                 </div>
@@ -153,7 +149,7 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                       
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                     </div>
                   </div>
@@ -176,9 +172,96 @@
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+   <!-- jquery validation starts -->
+    <script>
+     function closeModal() {
+    var myModal = document.getElementById('basicModal');
+    var modalInstance = bootstrap.Modal.getInstance(myModal);
+    modalInstance.hide();
+    myModal.remove();
+   } 
+      $(document).ready(function(){
+          $("#myForm").validate({
+            rules:{
+              name:{
+                required:true
+              },
+              email:{
+                required: true
+              },
+              password:{
+                required: true
+              },
+              retype_password:{
+                required: true,
+                equalTo: "#password"
+              },
+              contact:{
+                required: true
+              },
+              uploadfile:{
+                required: true
+              },
+
+            },
+            messages:{
+              name:{
+                required: "field is required"
+              },
+              email:{
+                required: "field is required"
+              },
+              password:{
+                required: "field is required"
+              },
+              retype_password:{
+                required: "field is required",
+                equalTo: "passwords must be same"
+              },
+              contact:{
+                required: "field is required"
+              },
+              uploadfile:{
+                required: "field is required"
+              },
+
+            }
+        
+          });
+         
+            $("#submit").on('click', function(e){
+             
+              closeModal();
+               var form = $('#myForm')[0];
+               var formData = new FormData(form);
+               e.preventDefault();
+               if($("#myForm").valid())
+              {
+                  $.ajax({
+                      url: "action.php",
+                      type: "POST",
+                      processData: false,
+                      contentType: false,
+                      data: formData,
+                      success: function(response)
+                      {  
+
+                        closeModal();
+                        $("#myForm")[0].reset(); 
+                        Swal.fire("Data Submitted Successfully");                 
+                      },
+
+                  });          
+              }
+             
+            });
+     });
+</script>
 
 </body>
 
