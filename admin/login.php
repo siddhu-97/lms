@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +25,10 @@
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -37,6 +40,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
 </head>
 
 <body>
@@ -46,116 +50,138 @@
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+          <div class="row back_background justify-content-center">
+            <div class="col-lg-5 logo_background col-md-6
+             d-flex flex-column align-items-center justify-content-center">
 
               <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+                <a href="" class="logo d-flex align-items-center w-auto">
+                  <img class="login_logo" src="assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">We Care!</span>
                 </a>
               </div><!-- End Logo -->
 
-              <div class="card mb-3">
-
+              <div class="card mb-6">
                 <div class="card-body">
-
-                  <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
-                  </div>
+                  
+                  <form id="login_form" action="action.php" method="POST" class="row g-3 needs-validation" novalidate>
 
-                  <form action="action.php" method="POST" class="row g-3 needs-validation" novalidate>
-
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
-                      </div>
+                    <div class=" input-login-text col-12">
+                      <label for="yourUsername" class="form-label">Email Address</label>
+                        <input type="text" name="login_email" class="form-control" id="yourUsername">                  
+                        <span class="input-login-Error-text" id="usernameError"></span>                     
+                    </div>                    
+                    <div class="input-login-text col-12">
+                      <label for="yourPassword" class="form-label">Password</label>                     
+                      <input type="password" name="login_password" class="form-control" id="yourPassword">
+                      <span class="input-group-text" id="passwordError"></span>
+                      <button type="button" id="togglePassword" class="toggle-password" onclick="togglePasswordField()">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
                     </div>
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                    <div class="input-login-text col-12">
+                      <button class="btn btn-primary w-100" type="submit" onclick=" validateLogin()">Login</button>
                     </div>
+                    <div class="col-12">
 
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                      </div>
+                      <p class="small mb-0">Don't have account? <a href="" data-bs-toggle="modal" data-bs-target="#basicModal">Create an account</a></p>
+                      <p class="forgot small mb-0">Forgot Password? <a href="" data-bs-toggle="modal" data-bs-target="#forgot_modal">click here</a></p>
                     </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href=""  data-bs-toggle="modal" data-bs-target="#basicModal">create account</a> </p>
-                    </div> 
                   </form>
-
+                  <!-- Basic Modal -->
+              <div class="modal fade" id="basicModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="registrstion_form modal-content">
+                    <div class="modal-header" style="height: 60px;">
+                    <h3 class="registration_title card-title"><B><i>Initiate your registration process with W<sup><b>3</b></sup> Care!</i></B></h3>
+                    <img class="registration_logo" src="assets/img/logo.png" alt="">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       <!-- Multi Columns Form -->
+                <form id="myForm" class="registration row g-3"  enctype="multipart/form-data" >
+                <div class="col-md-12">
+                  <label for="Name" class="form-label"> Name</label>
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Enter your name">
+                </div>
+                <div class="col-md-12">
+                  <label for="designation" class="form-label">Designation</label>
+                  <input type="text" class="form-control" name="designation" id="designation" placeholder=" your designation">
+                </div>
+               
+                 <div class="col-12">
+                  <label for="inputAddress5" class="form-label">Email Address</label>
+                  <input type="text" class="form-control" name="email" id="email" placeholder="Enter your username">
+                </div>
+                <div class="col-md-6">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputPassword5" class="form-label">Retype Password</label>
+                  <input type="password" class="form-control" name="Retype_password" id="inputPassword5" placeholder="Retype your password">
+                </div>
+                <div class="col-md-6">
+                  <label for="Contact" class="form-label">Contact</label>
+                  <input type="text" class="form-control" name="contact" id="contact" placeholder="Your contact">
+                </div>
+                <div class="col-md-6">
+                <label for="image" class="form-label">File Upload</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="file" name="uploadfile" id="formFile">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                      Check me out
+                    </label>
+                  </div>    
+                </div>
+                      <div class="modal-footer"> 
+                         <div class="text-center">
+                          <button type="button" class="btn btn-secondary" id="close_modal" data-bs-dismiss="modal">Close</button> 
+                           <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                         <button type="reset" class="btn btn-secondary">Reset</button>
+                       </div>                       
+                      </div>
+                       </form><!-- End Multi Columns Form --> 
+                  </div>
+                  </div>
                 </div>
               </div>
+              <!-- End Basic Modal-->
 
-              <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              <!-- Modal  for forgot password start-->
+            <!-- Basic Modal -->
+          
+              <div class="modal fade" id="forgot_modal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Basic Modal</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      O bhai forgot password karna sikh le pahle..
+                        </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Basic Modal-->
+            <!-- Modal  for forgot password start-->
+                </div>
               </div>
 
             </div>
           </div>
         </div>
 
-        <!-- basic modal -->
-           
-        <form id="myForm" method="POST" enctype="multipart/form-data">
-        <div class="modal fade" id="basicModal" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Sign Up Here</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row g-3">
-                                <div class="col-md-12">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name">
-                                </div>
-                                <div class="col-12">
-                                <input type="email" name="email" class="form-control" placeholder="Email">
-                                </div>
-                                <div class="col-md-6">
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
-                                </div>
-                                <div class="col-md-6">
-                                <input type="password" name="retype_password" class="form-control" placeholder="Retype Password">
-                                </div>
-                                <div class="col-md-6">
-                                <input type="text" name="contact" class="form-control" placeholder="Contact">
-                                </div>
-                                <div class="col-md-6">
-                                <input class="form-control" type="file" name="uploadfile" id="formFile">
-                                </div>
-                               
-                                <div class="text-center">
-                                </div>
-                                </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      
-                  <button type="submit" id="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- End Basic Modal-->
-            </form>
       </section>
 
     </div>
@@ -172,96 +198,72 @@
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+ 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-   <!-- jquery validation starts -->
-    <script>
-     function closeModal() {
-    var myModal = document.getElementById('basicModal');
-    var modalInstance = bootstrap.Modal.getInstance(myModal);
-    modalInstance.hide();
-    myModal.remove();
-   } 
-      $(document).ready(function(){
-          $("#myForm").validate({
-            rules:{
-              name:{
-                required:true
-              },
-              email:{
-                required: true
-              },
-              password:{
-                required: true
-              },
-              retype_password:{
-                required: true,
-                equalTo: "#password"
-              },
-              contact:{
-                required: true
-              },
-              uploadfile:{
-                required: true
-              },
+  <script src="assets/js/validation_insert.js"></script>
+  <script>
+function togglePasswordField() {
+  const password = document.querySelector('#yourPassword');
+  const toggleButton = document.querySelector('#togglePassword');
 
-            },
-            messages:{
-              name:{
-                required: "field is required"
-              },
-              email:{
-                required: "field is required"
-              },
-              password:{
-                required: "field is required"
-              },
-              retype_password:{
-                required: "field is required",
-                equalTo: "passwords must be same"
-              },
-              contact:{
-                required: "field is required"
-              },
-              uploadfile:{
-                required: "field is required"
-              },
+  // toggle the type attribute
+  const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+  password.setAttribute('type', type);
 
+  // toggle the eye icon
+  const eyeIcon = toggleButton.querySelector('i');
+  if (eyeIcon.classList.contains('fa-eye')) {
+    eyeIcon.classList.remove('fa-eye');
+    eyeIcon.classList.add('fa-eye-slash');
+  } else {
+    eyeIcon.classList.remove('fa-eye-slash');
+    eyeIcon.classList.add('fa-eye');
+  }
+}
+
+  </script>
+ <script>
+function validateLogin(){ -->
+          <!-- alert("hey you clicked the submit button");
+     
+
+
+        document.getElementById('login_form').addEventListener('submit', function(event) {
+            var username = document.getElementById('yourUsername').value;
+            var password = document.getElementById('yourPassword').value;
+            var usernameError = document.getElementById('usernameError');
+            var passwordError = document.getElementById('passwordError');        
+            var isValid = true;
+
+            // Clear previous error messages
+            usernameError.textContent = '';
+            passwordError.textContent = '';
+
+            // Custom validation logic -->
+            <!-- if (username.trim() === '') {
+                usernameError.textContent = '*Username is required';
+                isValid = false;
             }
+
+            if (password.trim() === '') {
+                passwordError.textContent = '*Password is required';
+                isValid = false;
+               }   
+            else if(password.length<6){
+                passwordError.textContent = '*Password must be greater than 6 characters';
+                isValid = false;
+            } 
+                  if (!isValid) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+          
+        });
         
-          });
-         
-            $("#submit").on('click', function(e){
-             
-              closeModal();
-               var form = $('#myForm')[0];
-               var formData = new FormData(form);
-               e.preventDefault();
-               if($("#myForm").valid())
-              {
-                  $.ajax({
-                      url: "action.php",
-                      type: "POST",
-                      processData: false,
-                      contentType: false,
-                      data: formData,
-                      success: function(response)
-                      {  
+      }
+    </script>
 
-                        closeModal();
-                        $("#myForm")[0].reset(); 
-                        Swal.fire("Data Submitted Successfully");                 
-                      },
-
-                  });          
-              }
-             
-            });
-     });
-</script>
+  
 
 </body>
 

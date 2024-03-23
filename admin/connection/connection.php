@@ -5,5 +5,5 @@ $password = "";
 $database = "lms";
 
 $connect = mysqli_connect($servername,$username,$password,$database);
-
+ 
 ?>

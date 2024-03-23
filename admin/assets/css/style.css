@@ -220,8 +220,8 @@ h6 {
 .card {
   margin-bottom: 30px;
   border: none;
-  border-radius: 5px;
-  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  border-radius: 30px;
+  box-shadow: 0px 0 30px rgba(15, 99, 245, 0.1);
 }
 
 .card-header,
@@ -236,12 +236,12 @@ h6 {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #012970;
+  color: #411be9;
   font-family: "Poppins", sans-serif;
 }
 
 .card-title span {
-  color: #899bbd;
+  color: #2f61be;
   font-size: 14px;
   font-weight: 400;
 }
@@ -357,16 +357,52 @@ h6 {
 .logo {
   line-height: 1;
 }
+.login_logo{
+  max-height: 105px;
+  width: 130px;
+  border-radius: 70px;
+}
+.registration_logo{
+    max-height: 102px;
+    width: 65px;
+    border-radius: 85px;
+    margin-left: -513px;
+}
+.registration_title{
+  margin-left: 83px;
+}
+.back_background{
+  background-color: #f3f3f7;
+  border-radius: 15px;
 
-@media (min-width: 1200px) {
+}
+.logo_background {
+  background-color: #cbd6eb;
+  border-radius: 46px;
+}
+
+@media (min-width: 200px) {
   .logo {
     width: 280px;
   }
 }
+.registrstion_form{
+  background-color: #917d7d;
+  margin-bottom: auto;
+}
+.registration{
+  width: 690px;
+    margin-left: 32px;  
+}
+.add_user{
+  float: right;
+  margin-top: 12px;
+}
 
 .logo img {
-  max-height: 26px;
-  margin-right: 6px;
+  max-height: 110px;
+  margin-right: 12px;
+  width: 130px;
 }
 
 .logo span {
@@ -375,6 +411,52 @@ h6 {
   color: #012970;
   font-family: "Nunito", sans-serif;
 }
+.input-login-text{
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+}
+.input-group-text{
+  display: none;
+}
+/* #yourUsername{
+
+}
+.input-login-Error-text{
+  display:block;
+  width:90%;
+  border:0;
+  border-bottom: 2px solid #555;
+  background:transparent;
+  outline:none;
+  font-size: 26px;
+  padding: 5px 2px;
+  position: relative;
+  z-index: 10;
+} */
+
+ 
+.toggle-password {
+  float: right;
+  margin-top: -36px;
+  border: transparent;
+  background-color: white;
+  margin-right: 1px;
+}
+
+.password-container {
+  position: relative;
+}
+
+.fa-eye-slash:before {
+  content: "\f070";
+}
+
+.fa-eye:before {
+  content: "\f06e";
+}
+
+
 
 .header {
   transition: all 0.5s;
